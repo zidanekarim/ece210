@@ -1,0 +1,49 @@
+% zidane karim
+%% 1
+u_nums = linspace(-pi, pi, 10^4);
+u = exp(sin(u_nums));
+
+v = u(u < 2);
+
+avg = sum(v) / length(v); % not / 10^4 bc includes too many
+%% 2
+
+rows = [1:256];
+cols = [1:256]';
+first = (abs(rows - 100) + abs(cols - 100)) < 40;
+second = sqrt((rows - 100).^2+(cols - 100).^2) > 15;
+L = first & second;
+
+imshow(L);
+%% 3
+
+vector_1 = [1:6]; 
+vector_2 = [1:6]';
+vector_3 = reshape(1:6, 1, 1, 6);
+
+S = vector_1 + vector_2 + vector_3;
+
+S_2 = sum(S(:) >= 11);
+disp(S_2); % 108
+prob = S_2 / numel(S); % 50%
+
+%% 4/extra
+
+rows2 = [1:256];
+cols2 = [1:256]';
+
+first_term = ((rows2-88) .^2)./2 
+second_term  = ((cols2-76).^2)
+primary_condition = (sqrt(first_term + second_term) > 15)
+
+extra1 = max(abs(rows2 - 128), (4*abs(cols2 - 106))/5) < 40;
+extra2 = max(abs(rows2 - 177), abs(cols2 - 96)/4) < 9;
+extra3 = sqrt((rows2 - 128).^2 + (3*(cols2 - 56).^2)/2) < 40;
+extra4 = sqrt(((rows2 - 88).^2)/2 + (cols2 - 76).^2) < 20;
+extra5 = sqrt((rows2m - 103).^2 + ((cols2 - 156).^2)/5) < 15;
+extra6 = sqrt((rows2 - 153).^2 + ((cols2 - 156).^2)/5) < 15;
+
+extra_joined = extra1 | 
+
+
+U = 

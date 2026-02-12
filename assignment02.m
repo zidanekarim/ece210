@@ -16,7 +16,7 @@ B_second_half = B_first_half -1;
 B = [B_first_half B_second_half];
 
 % 4
-pies = linspace(-pi, pi);
+pies = linspace(-pi, pi, 1000);
 ns = (0:50)';
 an = (2*ns)+1; % changed to 1-50, 0-50 results in division by zero
 
