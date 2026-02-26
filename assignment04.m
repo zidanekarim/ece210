@@ -1,0 +1,28 @@
+%% 1. dotprod
+
+dotprod = @(x, y) (x)' * y;
+
+
+%% 2
+function [orthonormal] = is_orthonormal(array, func) 
+    num_cols = size(array, 2);
+    tolerance = 1000 * eps;
+    for k = 1:num_cols
+        first_col = array(:, k);
+        if abs(sqrt(func(first_col, first_col)) - 1) > tolerance % norm  check
+            orthonormal = false;
+            return
+        end
+        for j=k+1:num_cols
+            second_col = array(:, j);
+            if abs(func(second_col, second_col)) > tolerance % orthogonality check
+                orthonormal = false;
+                return
+            end
+        end
+    end
+    orthonormal = true;
+    return
+end
+
+%% 3
