@@ -8,14 +8,12 @@ function [orthonormal] = is_orthonormal(array, func)
     num_cols = size(array, 2);
     tolerance = 1000 * eps;
     for k = 1:num_cols
-        first_col = array(:, k);
-        if abs(sqrt(func(first_col, first_col)) - 1) > tolerance % norm  check
+        if abs(sqrt(func(array(:,k), array(:,k))) - 1) > tolerance
             orthonormal = false;
             return
         end
-        for j=k+1:num_cols
-            second_col = array(:, j);
-            if abs(func(second_col, second_col)) > tolerance % orthogonality check
+        for j = k+1:num_cols
+            if abs(func(array(:,k), array(:,j))) > tolerance 
                 orthonormal = false;
                 return
             end
@@ -25,4 +23,28 @@ function [orthonormal] = is_orthonormal(array, func)
     return
 end
 
-%% 3
+%% 3 gram-schmidt
+function [orthonormalArray] = gram_schmidt(array, func)
+    [num_rows, num_cols] = size(array);
+    if (is_orthonormal(array, func))
+        orthonormalArray = array;
+        return
+    end
+    orthonormalArray = zeros(num_rows, num_cols);
+    for k = 1:num_cols
+        v_k = array(:, k);
+        for j = 1:k-1
+            v_k = v_k - (func(orthonormalArray(:, j), v_k) * orthonormalArray(:, j));
+        end
+        orthonormalArray(:, k) = v_k / sqrt(func(v_k, v_k)); 
+    end
+
+    
+        
+end
+
+%% 4 tester
+
+test_matrix = randi(15,4,4) + 1j * randi(15, 4 ,4);
+gram_schmidt_test_matrix = gram_schmidt(test_matrix, dotprod)
+output = is_orthonormal(gram_schmidt_test_matrix, dotprod)
