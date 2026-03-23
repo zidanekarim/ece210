@@ -25,5 +25,6 @@ noise = noise_mag * randn(1, N); % random magnitude now
 x = x + noise; 
 
 X = fft(x);
+X_shifted = fftshift(X);
 
 figure; 
