@@ -1,0 +1,26 @@
+% Zidane Karim -- 3/23/2026
+%% q1
+
+fs = 44100; % sample
+n = 88200;
+T = 1 / fs;
+t = (0:n-1) * T;
+
+freqs = [14.96e3, 5.52e3, 3.15e3, -3.76e3, 11.01e3];
+dbm_freqs = [20, 19, 7, -7, -4];
+
+% convertinjg to deicbels
+scale = 10.^(dbm_freqs / 20);
+
+
+x = zeros(1, N);
+
+for i = 1:length(freqs)
+    x = x + dbm_freqs(i) * exp(1j * 2 * pi * freqs(i) * t);
+end
+
+noise_dBm = -10;
+noise_mag = 10^(noise_dBm / 20);
+noise = noise_mag * randn(1, N)
+
+figure; 
